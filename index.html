@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sprite Sheet Slicer - Slice sprite sheets into individual tiles" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <title>Sprite Sheet Slicer</title>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Sprite Sheet Slicer</h1>
+      <p>Drag & drop a PNG sprite sheet to slice it into individual tiles</p>
+    </header>
+
+    <main>
+      <div class="layout">
+        <!-- Left Panel: Controls -->
+        <div class="left-panel">
+          <!-- File Import -->
+          <section class="section">
+            <h2>Import</h2>
+            <div id="drop-zone" class="drop-zone">
+              <div class="drop-zone-content">
+                <p>Drag & drop PNG file here</p>
+                <p>or</p>
+                <input type="file" id="file-input" accept="image/png" />
+                <label for="file-input" class="file-button">Choose File</label>
+              </div>
+            </div>
+            <div id="image-info" class="image-info"></div>
+          </section>
+
+          <!-- Tiling Settings -->
+          <section class="section" id="controls">
+            <h2>Tiling Settings</h2>
+            
+            <div class="auto-detect">
+              <button id="auto-detect-btn" type="button" disabled>Auto Detect</button>
+              <small>Try to automatically detect tile dimensions</small>
+            </div>
+
+            <div class="form-group">
+              <label for="tile-width">Tile Width (px):</label>
+              <input type="number" id="tile-width" min="1" value="32" />
+            </div>
+
+            <div class="form-group">
+              <label for="tile-height">Tile Height (px):</label>
+              <input type="number" id="tile-height" min="1" value="32" />
+            </div>
+
+            <div class="form-group">
+              <label for="margin">Margin (px):</label>
+              <input type="number" id="margin" min="0" value="0" />
+              <small>Outer padding around the entire sheet</small>
+            </div>
+
+            <div class="form-group">
+              <label for="spacing">Spacing (px):</label>
+              <input type="number" id="spacing" min="0" value="0" />
+              <small>Gutter between tiles</small>
+            </div>
+
+            <div class="form-group">
+              <label for="offset-x">Offset X (px):</label>
+              <input type="number" id="offset-x" min="0" value="0" />
+            </div>
+
+            <div class="form-group">
+              <label for="offset-y">Offset Y (px):</label>
+              <input type="number" id="offset-y" min="0" value="0" />
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="trim-transparent" />
+                Trim transparent edges
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="preserve-padding">Preserve padding (px):</label>
+              <input type="number" id="preserve-padding" min="0" value="0" />
+              <small>Padding around trimmed tiles</small>
+            </div>
+
+            <div class="grid-controls">
+              <label>
+                <input type="checkbox" id="grid-toggle" checked />
+                Show grid overlay
+              </label>
+              <div id="grid-info" class="grid-info">0 × 0 = 0 tiles</div>
+            </div>
+
+            <div id="validation-errors" class="validation-errors"></div>
+          </section>
+
+          <!-- Export Settings -->
+          <section class="section">
+            <h2>Export Settings</h2>
+
+            <div class="form-group">
+              <label for="naming-pattern">Naming Pattern:</label>
+              <select id="naming-pattern">
+                <option value="row_col">row_col.png (0_0.png)</option>
+                <option value="index">index.png (0.png)</option>
+                <option value="custom">Custom prefix</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="custom-prefix">Custom Prefix:</label>
+              <input type="text" id="custom-prefix" placeholder="sprite_" />
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="skip-transparent" />
+                Skip fully transparent tiles
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="include-contact-sheet" />
+                Include contact sheet
+              </label>
+            </div>
+
+            <button id="export-btn" type="button" class="export-button" disabled>
+              Export ZIP
+            </button>
+
+            <div id="export-progress" class="progress-container">
+              <div class="progress-bar">
+                <div id="progress-bar" class="progress-fill"></div>
+              </div>
+              <div id="progress-text" class="progress-text">0/0 tiles</div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right Panel: Preview -->
+        <div class="right-panel">
+          <section class="section">
+            <h2>Preview</h2>
+            <div class="preview-container">
+              <canvas id="preview-canvas" class="preview-canvas"></canvas>
+              <canvas id="overlay-canvas" class="overlay-canvas"></canvas>
+            </div>
+            <div class="preview-controls">
+              <small>Use mouse wheel to zoom, drag to pan, or use +/- keys</small>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
