@@ -1,0 +1,23 @@
+{
+  "name": "Sprite Sheet Slicer",
+  "short_name": "SpriteSlicer",
+  "description": "Slice sprite sheets into individual tiles offline",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f5",
+  "theme_color": "#4299e1",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["graphics", "utilities", "productivity"],
+  "lang": "en",
+  "scope": "/",
+  "prefer_related_applications": false
+}
+
